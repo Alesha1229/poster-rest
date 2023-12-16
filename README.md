@@ -1,3 +1,4 @@
+Poster-service
 1. Java 8-17
 2. Spring Boot
 3. Spring Data JPA (ORM)
