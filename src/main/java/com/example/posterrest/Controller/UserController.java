@@ -43,6 +43,11 @@ public class UserController {
 //    }
 
 
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteUser(@PathVariable Long id) {
+        userService.deleteUser(id);
+        return ResponseEntity.ok("User deleted successfully");
+    }
 
     @PostMapping("/create")
     public ResponseEntity<User> createUser(@RequestBody User user) {
@@ -69,7 +74,7 @@ public class UserController {
         return user.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
-    @PostMapping("/{id}/photo")
+    @PutMapping("/addPhoto/{id}/")
         public ResponseEntity<String> uploadPhoto(
                 @PathVariable Long id,
                 @RequestParam("file") MultipartFile file) {
@@ -80,6 +85,7 @@ public class UserController {
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                         .body("Failed to upload photo");
             }
+
         }
 
     }

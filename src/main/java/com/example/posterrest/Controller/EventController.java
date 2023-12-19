@@ -56,4 +56,9 @@ public class EventController {
         List<Event> events = eventService.getEventsBetweenDates(startDate, endDate);
         return new ResponseEntity<>(events, HttpStatus.OK);
     }
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteEvent(@PathVariable Long id) {
+        eventService.deleteEvent(id);
+        return ResponseEntity.ok("Event deleted successfully");
+    }
 }

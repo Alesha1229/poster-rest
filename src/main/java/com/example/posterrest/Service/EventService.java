@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,4 +38,11 @@ public class EventService {
     public List<Event> getEventsBetweenDates(LocalDate startDate, LocalDate endDate) {
         return eventRepository.findAllByStartDateBetweenOrderByStartDateAsc(startDate, endDate);
     }
+    public void deleteEvent(Long id) {
+        Event event = eventRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Event not found with id: " + id));
+
+        eventRepository.delete(event);
+    }
+
 }

@@ -2,15 +2,15 @@ package com.example.posterrest.Service;
 
 import com.example.posterrest.Entity.User;
 import com.example.posterrest.Repository.UserRepository;
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserService {
+public class UserService{
 
     private final UserRepository userRepository;
 
@@ -45,4 +45,10 @@ public class UserService {
             throw new EntityNotFoundException("User not found with id: " + userId);
         }
     }
+
+    public void deleteUser(Long id) {
+        userRepository.deleteById(id);
+    }
+
+
 }
