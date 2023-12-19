@@ -9,7 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,7 +26,7 @@ public class EventController {
         this.userService = userService;
     }
 
-    @PostMapping("/{userId}")
+    @PostMapping("create/{userId}")
     public ResponseEntity<Event> createEvent(@RequestBody Event event, @PathVariable Long userId) {
         Optional<User> user = userService.getUserById(userId);
         if (user.isPresent()) {
@@ -37,7 +37,7 @@ public class EventController {
         }
     }
 
-    @GetMapping
+    @GetMapping("/getAll")
     public ResponseEntity<List<Event>> getAllEvents() {
         List<Event> events = eventService.getAllEvents();
         return new ResponseEntity<>(events, HttpStatus.OK);
@@ -50,9 +50,9 @@ public class EventController {
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @GetMapping("/date")
-    public ResponseEntity<List<Event>> getEventsBetweenDates(@RequestParam LocalDateTime startDate,
-                                                             @RequestParam LocalDateTime endDate) {
+    @GetMapping("/date/{startDate}/{endDate}")
+    public ResponseEntity<List<Event>> getEventsBetweenDates(@PathVariable LocalDate startDate,
+                                                             @PathVariable LocalDate endDate) {
         List<Event> events = eventService.getEventsBetweenDates(startDate, endDate);
         return new ResponseEntity<>(events, HttpStatus.OK);
     }
