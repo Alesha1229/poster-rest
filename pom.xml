@@ -15,6 +15,7 @@
     <description>poster-rest</description>
     <properties>
         <java.version>17</java.version>
+        <logstash.host>logstashcsm.example.ru</logstash.host>
     </properties>
     <dependencies>
         <dependency>
@@ -85,11 +86,9 @@
             <version>1.7.0</version>
         </dependency>
         <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>1.2.14</version>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
         </dependency>
-
 
     </dependencies>
 
